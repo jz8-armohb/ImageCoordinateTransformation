@@ -6,4 +6,5 @@ extern int wDst;
 extern int hDst;
 
 /* Function declarations */
-void ImgRotation(unsigned char* oriBuff, unsigned char* dstBuff, double degree);
+void Rotation(unsigned char* oriBuff, unsigned char* dstBuff, double degree);
+void Scaling(unsigned char* oriBuff, unsigned char* dstBuff, double factor);

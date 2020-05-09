@@ -23,8 +23,9 @@ int main(int argc, char* argv[]) {
     }
 
     /* Space allocation */
-    cout << "Rotated image size: " << wDst << " by " << hDst << "." << endl;
+    cout << "Output image size: " << wDst << " by " << hDst << "." << endl;
     unsigned char* oriYBuff = new unsigned char[w * h];
+    unsigned char* tempYBuff = new unsigned char[wDst * hDst];
     unsigned char* dstYBuff = new unsigned char[wDst * hDst];
     unsigned char* dstUBuff = new unsigned char[wDst * hDst / 4];
     unsigned char* dstVBuff = new unsigned char[wDst * hDst / 4];
@@ -32,8 +33,9 @@ int main(int argc, char* argv[]) {
     /* Read Y component into the buffer */
     fread(oriYBuff, sizeof(unsigned char), w * h, oriImgPtr);
 
-    /* Rotation */
-    ImgRotation(oriYBuff, dstYBuff, 30);
+    /* Coordinate transformation */
+    Scaling(oriYBuff, dstYBuff, 2.5);
+    //Rotation(oriYBuff, dstYBuff, 30);
 
     /* Write transformed pixel data into a file */
     fwrite(dstYBuff, sizeof(unsigned char), wDst * hDst, dstImgPtr);
@@ -45,6 +47,7 @@ int main(int argc, char* argv[]) {
     fclose(oriImgPtr);
     fclose(dstImgPtr);
     delete[]oriYBuff;
+    delete[]tempYBuff;
     delete[]dstYBuff;
     delete[]dstUBuff;
     delete[]dstVBuff;
